@@ -10,24 +10,22 @@ using Melia.Shared.L10N;
 using Melia.Shared.Scripting;
 using Melia.Shared.World;
 using Melia.Zone;
-using Melia.Zone.Events;
 using Melia.Zone.Scripting;
 using Melia.Zone.World.Actors.Characters;
 using Melia.Zone.World.Actors.Monsters;
 
 public class WorldMapClientScript : ClientScript
 {
-	public override void Load()
+	protected override void Load()
 	{
 		this.LoadAllScripts();
 		this.LoadIesMods();
 	}
 
-	[On("PlayerReady")]
-	protected void OnPlayerReady(object sender, PlayerEventArgs e)
+	protected override void Ready(Character character)
 	{
-		this.SendAllScripts(e.Character);
-		this.SendIcons(e.Character);
+		this.SendAllScripts(character);
+		this.SendIcons(character);
 	}
 
 	private void LoadIesMods()
